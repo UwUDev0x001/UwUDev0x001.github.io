@@ -3,6 +3,15 @@
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+.saucisse {
+  height: auto;
+  margin-right: auto;
+  margin-left: auto;
+  max-height: 80vh;
+  max-width: inherit;
+  object-fit: contain;
+}
+
 .materialize-red {
   background-color: #e51c23 !important;
 }

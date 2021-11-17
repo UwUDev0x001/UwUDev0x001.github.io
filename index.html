@@ -3,7 +3,7 @@
   <head>
     <title>Thighs.pics</title>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   <body style="background-color: #1A2226">
@@ -108,10 +108,14 @@
         //cardImage
         var cardImage = document.createElement("div");
         cardImage.classList.add('card-image');
+        cardImage.onclick = function(event) {
+          window.open(pic.url, '_blank');
+        }
 
         //image
         var image = document.createElement("img");
         image.src = pic.url;
+        image.classList.add('saucisse');
 
         //cardDesc
         var cardDesc = document.createElement("div");
