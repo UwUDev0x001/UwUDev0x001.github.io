@@ -2,11 +2,27 @@
 <html>
   <head>
     <title>Thighs.pics</title>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Discord Embed -->
+    <meta content="Thighs.pics" property="og:title" />
+    <meta content="😳😳😳" property="og:description" />
+    <meta content="https://thighs.pics" property="og:url" />
+    <meta content="https://i.pinimg.com/originals/d6/0c/c6/d60cc64523cf97089357505669f98998.gif" property="og:image" />
+    <meta content="#d500f9 " data-react-helmet="true" name="theme-color" />
   </head>
   <body style="background-color: #1A2226">
+
+    <nav>
+      <div class="nav-wrapper purple accent-3">
+        <a href="#" class="brand-logo">Thighs.pics</a>
+        <ul id="nav-mobile" class="right hide-on-small">
+          <li><strong><a href="https://gist.github.com/UwUDev/eae1cfa1bc8a2a1252c45e9affb34c3e" id="bankSize"></a></strong></li>
+        </ul>
+      </div>
+    </nav>
 
     <script type="text/javascript">
       var index = 0;
@@ -42,6 +58,8 @@
         });*/
 
         console.log("Scrapped " + pics.length + " pics.");
+        var totalImgs = document.getElementById("bankSize");
+        totalImgs.text = pics.length + " pics loaded"
 
         /*pics.forEach(pic =>{
           picToHTML(pic);
