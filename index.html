@@ -1,9 +1,176 @@
 <!doctype html>
 <html>
   <head>
-    <title>This is the title of the webpage !</title>
+    <title>Thighs.pics</title>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
-  <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+  <body style="background-color: #1A2226">
+
+    <script type="text/javascript">
+      var index = 0;
+      var pics = [];
+      function scrappe() {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "https://gist.githubusercontent.com/UwUDev/eae1cfa1bc8a2a1252c45e9affb34c3e/raw/thighs.pics", false ); // false for synchronous request (oui je sais gngngn c'est deprecated mais j'en ai rien a foutre)
+        xmlHttp.send( null );
+        var splits = xmlHttp.responseText.split('\n');
+        splits = shuffle(splits);
+        var counter = 0;
+        console.log(splits.length)
+        splits.forEach(url =>{
+          if (!url.includes('#')) {
+            const pic = new Object(); // java dev moment
+            var urlData = url.split(' | ');
+            pic.url = urlData[0];
+            pic.description = urlData[1]
+            pics.push(pic);
+            counter++;
+          }
+        });
+
+        /*pics.forEach(pic =>{
+          console.log(pic.url);
+          if (pic.description != undefined) {
+            const json = JSON.parse(pic.description);
+            console.log(json.desc);
+            json.credit.forEach(credit => {
+              console.log(credit.name + ": " + credit.user);
+            });
+          }
+        });*/
+
+        console.log("Scrapped " + pics.length + " pics.");
+
+        /*pics.forEach(pic =>{
+          picToHTML(pic);
+        });*/
+      }
+
+      function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+        return array;
+      }
+
+      function picToHTML(pic) {
+        var description = "no";
+        if (pic.description != undefined) {
+          description = "";
+          const json = JSON.parse(pic.description);
+          if (json.desc != "" && json.desc != undefined) {
+            description += json.desc + '<br>';
+          }
+          json.credit.forEach(credit => {
+            description += credit.name + ": <a target='_blank' href='" + credit.userUrl + credit.user + "'>@" + credit.user + "</a><br>";
+          });
+        }
+
+
+        //row
+        var row = document.createElement("div");
+        row.classList.add('row');
+
+        //uselessTag
+        var uselessTag = document.createElement("div");
+        uselessTag.classList.add('col');
+        uselessTag.classList.add('s0');
+        uselessTag.classList.add('m1');
+        uselessTag.classList.add('l2');
+
+        //uselessTag2
+        var uselessTag2 = document.createElement("div");
+        uselessTag2.classList.add('col');
+        uselessTag2.classList.add('s0');
+        uselessTag2.classList.add('m1');
+        uselessTag2.classList.add('l2');
+
+        //mainTag
+        var mainTag = document.createElement("div");
+        mainTag.classList.add('col');
+        mainTag.classList.add('s12');
+        mainTag.classList.add('m10');
+        mainTag.classList.add('l8');
+
+        //card
+        var card = document.createElement("div");
+        card.classList.add('card');
+        card.classList.add('blue-grey');
+        card.classList.add('darken-4');
+        card.classList.add('z-depth-4');
+
+        //cardImage
+        var cardImage = document.createElement("div");
+        cardImage.classList.add('card-image');
+
+        //image
+        var image = document.createElement("img");
+        image.src = pic.url;
+
+        //cardDesc
+        var cardDesc = document.createElement("div");
+        cardDesc.classList.add('card-content');
+        cardDesc.classList.add('white-text');
+
+        //text
+        var text = document.createElement("p");
+        text.innerHTML = description;
+
+        row.appendChild(uselessTag);
+        cardImage.appendChild(image);
+        card.appendChild(cardImage);
+        if (description != "no") {
+          cardDesc.appendChild(text);
+          card.appendChild(cardDesc);
+        }
+        mainTag.appendChild(card);
+        row.appendChild(mainTag);
+        row.appendChild(uselessTag2);
+
+        document.body.appendChild(row);
+      }
+
+      function addNewPics() {
+        var i = index * 5;
+        index++;
+        if (i <= pics.length)
+          picToHTML(pics[i]);
+        if (i+1 <= pics.length)
+          picToHTML(pics[i+1]);
+        if (i+2 <= pics.length)
+          picToHTML(pics[i+2]);
+        if (i+3 <= pics.length)
+          picToHTML(pics[i+3]);
+        if (i+4 <= pics.length)
+          picToHTML(pics[i+4]);
+      }
+
+      function ageVerify() {
+        let age = prompt('How old are you?', );
+        if (age < 18) {
+          window.location.href = "/blank";
+          window.location.replace("/blank");
+        }
+      }
+
+      window.addEventListener('load', function () {
+        ageVerify();
+        scrappe();
+        addNewPics();
+      })
+
+      window.onscroll = function(ev) {
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+              addNewPics();
+          }
+      };
+    </script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
   </body>
 </html>
